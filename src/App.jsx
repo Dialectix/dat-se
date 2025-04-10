@@ -13,7 +13,7 @@ function App() {
     setResponse('Thinking...');
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/ask', {
+      const res = await fetch('https://dat-flask-app-f0f8ekh5gthzfefj.australiaeast-01.azurewebsites.net/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -39,27 +39,7 @@ function App() {
   };
 
   if (stage === 'intro') {
-    return (
-      <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center px-4">
-        <div className="bg-gray-900 p-8 rounded-xl shadow-md w-[500px] text-center space-y-6">
-          <h1 className="text-2xl font-bold">Dialectical Analysis Theory™</h1>
-          <p className="text-gray-400 text-sm leading-loose">A theory for epistemic clarity</p>
-          <p className="text-gray-300 text-sm leading-loose">
-            Dialectix presents <span className="italic">Dialectical Analysis Theory™</span>, a structured method for
-            exploring complex questions through dialectical reasoning. <br /><br />
-            This theory is intended to foster reflective inquiry and intellectual honesty by guiding users through a
-            process of critical synthesis. <br /><br />
-            It does not offer final answers—but rather a disciplined path toward conceptual clarity.
-          </p>
-          <button
-            onClick={() => setStage('input')}
-            className="bg-indigo-600 hover:bg-indigo-500 transition px-6 py-2 rounded-lg text-white font-semibold"
-          >
-            Begin
-          </button>
-        </div>
-      </div>
-    );
+    return <LandingText onEngage={() => setStage('input')} />;
   }
 
   return (
