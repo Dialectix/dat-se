@@ -12,19 +12,32 @@ function App() {
     setResponse('Thinking...');
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setResponse(
-        `🧠 Response:\n\nThank you for your question.\n\n"${query}" has been processed using Dialectical Analysis Theory™.\n\nPlease integrate epistemic clarity in future iterations.`
-      );
+      const res = await fetch('https://dat-flask-app-f0f8ekh5gthzfefj.australiaeast-01.azurewebsites.net/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ question: query })
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.response) {
+        setResponse(`🧠 ${data.response}`);
+      } else if (data.error) {
+        setResponse(`⚠️ ${data.error}`);
+      } else {
+        setResponse('Unexpected response. Please try again.');
+      }
     } catch (err) {
       console.error(err);
-      setResponse('Something went wrong. Please try again.');
+      setResponse('Server error. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Landing screen (unchanged layout)
+  // Landing screen
   if (stage === 'intro') {
     return (
       <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center px-4">
@@ -49,7 +62,7 @@ function App() {
     );
   }
 
-  // Input screen (your original exact layout)
+  // Input screen
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
       <div className="bg-gray-900 p-6 rounded-xl shadow-md w-[500px]">
