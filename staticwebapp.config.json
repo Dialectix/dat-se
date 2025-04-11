@@ -3,11 +3,21 @@
     "rewrite": "/index.html",
     "exclude": ["/static/*", "/images/*", "/css/*", "/js/*"]
   },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html"
+    }
+  },
   "routes": [
     {
       "route": "/",
+      "allowedRoles": ["anonymous"],
       "statusCode": 301,
-      "redirect": "https://www.dialectix.com.au"
+      "redirect": "https://www.dialectix.com.au",
+      "rewrite": "/index.html",
+      "conditions": {
+        "hostname": "dialectix.com.au"
+      }
     }
   ]
 }
