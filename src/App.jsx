@@ -7,6 +7,50 @@ function App() {
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // ✅ Password protection state
+  const [authenticated, setAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+
+  // ✅ Early gate to prevent access
+  if (!authenticated) {
+    return (
+      <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
+        <h2 className="text-lg mb-4">Enter Access Password</h2>
+        <input
+          type="password"
+          className="p-2 rounded text-black mb-4 w-64 text-center"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+          className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded"
+          onClick={() => {
+            if (password === "dialectix2024") {
+              setAuthenticated(true);
+            } else {
+              alert("Incorrect password.");
+            }
+          }}
+        >
+          Unlock
+        </button>
+      </div>
+    );
+  }
+
+  // ✅ Main landing page
+  if (stage === 'intro') {
+    return (
+      <div className="h-screen bg-white flex flex-col relative">
+        <div className="flex-grow flex justify-center items-center px-4">
+          <LandingText onEngage={() => setStage('input')} />
+        </div>
+      </div>
+    );
+  }
+
+  // ✅ DAT input + response page
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -36,20 +80,8 @@ function App() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  // ✅ INTRO SCREEN: centered layout with fixed ticker
-  if (stage === 'intro') {
-    return (
-      <div className="h-screen bg-white flex flex-col relative">
-        <div className="flex-grow flex justify-center items-center px-4">
-          <LandingText onEngage={() => setStage('input')} />
-        </div>
-      </div>
-    );
-  }
-
-  // ✅ MAIN APP
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
       <div className="bg-gray-900 p-6 rounded-xl shadow-md w-[500px]">
