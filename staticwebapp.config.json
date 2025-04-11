@@ -2,6 +2,12 @@
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["/static/*", "/images/*", "/css/*", "/js/*"]
-  }
+  },
+  "routes": [
+    {
+      "route": "/",
+      "statusCode": 301,
+      "redirect": "https://www.dialectix.com.au"
+    }
+  ]
 }
-// trigger redeploy
