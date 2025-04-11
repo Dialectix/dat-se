@@ -36,12 +36,20 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
-
-  if (stage === 'intro') {
-    return <LandingText onEngage={() => setStage('input')} />;
   }
 
+  // ✅ INTRO SCREEN: centered layout with fixed ticker
+  if (stage === 'intro') {
+    return (
+      <div className="h-screen bg-white flex flex-col relative">
+        <div className="flex-grow flex justify-center items-center px-4">
+          <LandingText onEngage={() => setStage('input')} />
+        </div>
+      </div>
+    );
+  }
+
+  // ✅ MAIN APP
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
       <div className="bg-gray-900 p-6 rounded-xl shadow-md w-[500px]">
@@ -54,6 +62,7 @@ function App() {
         <p className="text-center text-xs text-gray-500 mb-4">
           Developed by Dialectix Pty Ltd — submit your question below.
         </p>
+
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <textarea
             placeholder="Type your question here..."
