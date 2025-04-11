@@ -1,7 +1,7 @@
 {
-    "navigationFallback": {
-      "rewrite": "/index.html",
-      "exclude": ["/static/*", "/images/*", "/css/*", "/js/*"]
-    }
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/static/*", "/images/*", "/css/*", "/js/*"]
   }
-  
+}
+// trigger redeploy
