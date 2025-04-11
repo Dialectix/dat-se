@@ -1,20 +1,4 @@
 {
-  "routes": [
-    {
-      "route": "/*",
-      "allowedRoles": ["anonymous"],
-      "rewrite": "/index.html",
-      "statusCode": 200,
-      "conditions": {
-        "hostname": "www.dialectix.com.au"
-      }
-    },
-    {
-      "route": "/*",
-      "statusCode": 301,
-      "redirect": "https://www.dialectix.com.au"
-    }
-  ],
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["/static/*", "/images/*", "/css/*", "/js/*"]
