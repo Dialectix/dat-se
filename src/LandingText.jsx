@@ -1,32 +1,13 @@
-import datLogo from '../assets/DAT_logo_transparent.png';
-
 export const LandingText = (props) => {
   return (
     <div className="w-full h-full relative text-base md:text-lg text-gray-300">
       {/* Centered landing content */}
       <div className="max-w-lg mx-auto h-full flex flex-col justify-center items-center text-center space-y-8 px-4">
-        {/* Logo manually sized for landing page */}
-        <div className="flex justify-center mt-[-1rem] mb-4">
-          <img
-            src={datLogo}
-            alt="DAT Logo"
-            style={{
-              width: '100px',
-              height: 'auto',
-              maxHeight: '48px',
-              objectFit: 'contain',
-              display: 'block',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.4)'
-            }}
-          />
-        </div>
-
         {/* HEADER */}
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-red-500">
-            IF YOU SEE THIS, THE PAGE IS UPDATING
+          <h1 className="text-3xl font-bold text-white">
+            Dialectical Analysis Theory (DAT)
           </h1>
-          
 
           <p className="text-gray-400 font-medium">
             Intellectual honesty | Epistemic clarity
