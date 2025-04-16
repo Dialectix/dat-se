@@ -1,3 +1,4 @@
+import LayoutWrapper from "./LayoutWrapper";
 import { useState, useEffect, useRef } from 'react';
 import { LandingText } from "./LandingText";
 import Logo from './components/Logo';
