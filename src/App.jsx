@@ -78,11 +78,12 @@ function App() {
         <div className="flex flex-col items-center gap-3">
           <input
             type="password"
-            className="w-full px-4 py-2 rounded-md border border-gray-300 text-black text-center shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Password"
+            className="w-64 px-5 py-3 rounded-xl text-black text-center text-base border border-gray-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          
           <button
             className="w-64 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-md font-semibold shadow transition"
             onClick={() => {
