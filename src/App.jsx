@@ -76,14 +76,14 @@ function App() {
         </div>
   
         {/* Centered Auth Box */}
-        <div className="bg-gray-900 p-6 rounded-xl shadow-md w-[320px] space-y-4">
+        <div className="bg-gray-900 p-6 rounded-xl shadow-md w-[320px] space-y-6">
           <label htmlFor="password" className="block text-sm font-medium text-gray-300 text-center">
             Enter Access Password
           </label>
           <input
             id="password"
             type="password"
-            className="w-full px-3 py-2 rounded-md text-black border border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-3 rounded-xl text-black border border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -99,11 +99,12 @@ function App() {
                 alert("Incorrect password.");
               }
             }}
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-md font-semibold shadow transition"
+            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-xl font-semibold shadow transition"
           >
             Unlock
           </button>
         </div>
+        
       </div>
     );
   }
