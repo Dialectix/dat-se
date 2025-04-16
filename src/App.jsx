@@ -63,53 +63,45 @@ function App() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
-        <div className="bg-gray-900 rounded-2xl shadow-lg border border-gray-700 max-w-md w-full p-8 space-y-6">
-          <div className="flex flex-col items-center space-y-4">
-            <Logo spacing="about" />
-            <h1 className="text-2xl md:text-3xl font-bold text-white text-center tracking-wide">
-              Dialectical Analysis Theory{TM}
-            </h1>
-            <p className="text-sm md:text-base text-gray-300 text-center">
-              Designed to challenge your thinking by guiding you to ask the right questions.
-            </p>
-          </div>
-  
-          <div className="space-y-4">
-            <label className="block text-center text-gray-300 font-medium">
-              Enter Access Password
-            </label>
-            <input
-              type="password"
-              className="w-full px-4 py-3 rounded-md bg-gray-100 text-black text-center shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              className="w-full py-3 rounded-md font-semibold text-white bg-indigo-600 hover:bg-indigo-500 transition shadow-md"
-              onClick={() => {
-                if (password === "dialectix2025") {
-                  sessionStorage.clear();
-                  setResponse(null);
-                  setAuthenticated(true);
-                  setTimeout(() => setStage("about"), 0);
-                } else {
-                  alert("Incorrect password.");
-                }
-              }}
-            >
-              Unlock
-            </button>
-          </div>
+      <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
+        <Logo spacing="about" />
+        <div className="flex flex-col items-center text-white mb-6">
+          <h1 className="text-xl md:text-2xl font-semibold text-center tracking-wide">
+            Dialectical Analysis Theory{TM} (DAT)
+          </h1>
+          <p className="text-sm md:text-base text-center text-gray-300 mt-2 max-w-xs">
+            Designed to challenge your thinking by guiding you to ask the right questions.
+          </p>
+        </div>
+        <h2 className="text-lg mb-2 font-semibold">Enter Access Password</h2>
+        <div className="w-full max-w-xs">
+          <input
+            type="password"
+            className="p-2 rounded text-black mb-4 w-full text-center border border-gray-400"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 w-full rounded font-semibold"
+            onClick={() => {
+              if (password === "dialectix2025") {
+                sessionStorage.clear();
+                setResponse(null);
+                setAuthenticated(true);
+                setTimeout(() => setStage("about"), 0);
+              } else {
+                alert("Incorrect password.");
+              }
+            }}
+          >
+            Unlock
+          </button>
         </div>
       </div>
     );
   }
   
-  
-  
-
   if (stage === 'about') {
     return (
       <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
