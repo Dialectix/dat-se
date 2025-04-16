@@ -1,0 +1,41 @@
+{
+  "allowConfigFileUpdates": true,
+  "branch": null,
+  "buildProperties": null,
+  "contentDistributionEndpoint": "https://content-am2.infrastructure.6.azurestaticapps.net",
+  "customDomains": [
+    "dialectix.com.au",
+    "www.dialectix.com.au"
+  ],
+  "databaseConnections": [],
+  "defaultHostname": "agreeable-field-063a7a703.6.azurestaticapps.net",
+  "enterpriseGradeCdnStatus": "Disabled",
+  "id": "/subscriptions/6fdfc59f-3156-46c9-834e-da0ee87e95e6/resourceGroups/DAT-SE/providers/Microsoft.Web/staticSites/dialectix-web",
+  "identity": null,
+  "keyVaultReferenceIdentity": "SystemAssigned",
+  "kind": null,
+  "linkedBackends": [],
+  "location": "West Europe",
+  "name": "dialectix-web",
+  "privateEndpointConnections": [],
+  "provider": "None",
+  "publicNetworkAccess": null,
+  "repositoryToken": null,
+  "repositoryUrl": null,
+  "resourceGroup": "DAT-SE",
+  "sku": {
+    "capabilities": null,
+    "capacity": null,
+    "family": null,
+    "locations": null,
+    "name": "Free",
+    "size": null,
+    "skuCapacity": null,
+    "tier": "Free"
+  },
+  "stagingEnvironmentPolicy": "Enabled",
+  "tags": null,
+  "templateProperties": null,
+  "type": "Microsoft.Web/staticSites",
+  "userProvidedFunctionApps": null
+}
