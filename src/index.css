@@ -1,0 +1,21 @@
+/* Full height fix */
+html, body, #root {
+  height: 100%;
+  background-color: #0f0f0f; /* Tailwind gray-950 */
+  color: white;
+}
+
+/* Tailwind core directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling ticker animation (custom) */
+@keyframes tickerLoop {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

@@ -1,6 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { LandingText } from "./LandingText";
-import Logo from './components/Logo'; // ✅ NEW
+import Logo from './components/Logo';
+
+// Helper to remove redundant prefixes
+function cleanSummary(text, label) {
+  const prefix = label.toLowerCase();
+  if (text?.toLowerCase().startsWith(prefix)) {
+    return text.slice(label.length).trimStart();
+  }
+  return text;
+}
 
 function App() {
   const [stage, setStage] = useState('about');
@@ -12,7 +21,7 @@ function App() {
   const [secondsLeft, setSecondsLeft] = useState(900);
   const timeoutRef = useRef(null);
   const DAT_ENGINE_VERSION = "DAT Engine v3.6";
-  const UI_BUILD_VERSION = "UI Build v1.1 (20250415)";
+  const UI_BUILD_VERSION = "UI Build v1.2 (20250415)";
   const TM = <span className="align-super text-[10px] ml-0.5 opacity-70">™</span>;
   const DAT_VERSION = `${DAT_ENGINE_VERSION} | ${UI_BUILD_VERSION}`;
   const UPDATE_NOTICE = "⚠️ Updates may occur without notice.";
@@ -55,6 +64,7 @@ function App() {
   if (!authenticated) {
     return (
       <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
+        <Logo spacing="about" />
         <div className="flex flex-col items-center text-white mb-6">
           <h1 className="text-xl md:text-2xl font-semibold text-center tracking-wide">
             Dialectical Analysis Theory{TM} (DAT)
@@ -99,24 +109,31 @@ function App() {
         <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
           {DAT_VERSION}
         </div>
-
-        {/* ✅ NEW: Top-Centered Logo */}
-        <Logo />
-
         <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
-          <div className="max-w-3xl mx-auto space-y-6 text-left text-gray-300 leading-relaxed text-base md:text-lg">
-            <h1 className="text-3xl font-semibold text-center text-white">
+          <div className="mt-20 mb-4">
+            <Logo />
+          </div>
+          <div className="max-w-3xl mx-auto space-y-5 text-left text-gray-300 leading-snug text-base md:text-lg">
+            <h1 className="text-2xl md:text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
               Dialectical Analysis Theory{TM} (DAT)
             </h1>
+            <div className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
+              DAT is not fast. It is precise. It is not generative. It is analytical.  
+              <br />It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
+            </div>
             <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them. It interrogates contradictions, not by erasing them, but renders them explicit, testable, and epistemically justified.</p>
             <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages: contradiction validation, synthesis testing, structural transformation, and theoretical resolution. At each step, DAT demands precision: ontological clarity, epistemic categorisation, and full structural containment.</p>
             <p>Where other systems summarise or infer, DAT refuses to compress. No step is skipped. No assumption goes unexamined. No contradiction is allowed to resolve prematurely.</p>
             <p>Language often masks contradiction. DAT disciplines the argument, slows down thought, dissects claims, and evaluates the line of enquiry across domains — mathematical, empirical, symbolic, phenomenological.</p>
             <p>In an age of cognitive clutter and heuristic shortcuts, DAT is not a generative agent — it is a reasoning engine. It retools LLMs to think dialectically, ensuring outputs are traceable, structured, and defensible.</p>
             <p>Whether the question is about causality, consciousness, ethics, or the limits of logic itself, DAT does not aim to decide what is true. It determines whether an argument holds — and under what conditions it must change.</p>
-            <p>DAT is not fast. It is precise. It is not generative. It is analytical. It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.</p>
             <div className="flex justify-center pt-4">
-              <button onClick={() => setStage('intro')} className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded text-lg">Next</button>
+              <button
+                onClick={() => setStage('intro')}
+                className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded text-lg font-semibold shadow-md"
+              >
+                Begin Dialectical Analysis
+              </button>
             </div>
           </div>
         </div>
@@ -136,6 +153,9 @@ function App() {
         <div className="h-screen bg-gray-950 text-white flex flex-col relative">
           <div className="flex-grow flex justify-center items-center px-4">
             <div className="max-w-3xl text-gray-300 text-base md:text-lg leading-relaxed text-center">
+              <div className="mt-12 mb-6">
+                <Logo />
+              </div>
               <LandingText onEngage={() => setStage('input')} />
             </div>
           </div>
@@ -155,10 +175,14 @@ function App() {
         </div>
         <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white relative">
           <div className="bg-gray-900 p-6 rounded-xl shadow-md w-[600px]">
+            <div className="flex flex-col items-center mt-16 mb-6">
+              <div className="pt-8">
+                <Logo />
+              </div>
+            </div>
             <h1 className="text-xl font-bold text-center mb-2">Dialectical Analysis Theory{TM} (DAT)</h1>
             <p className="text-center text-sm text-gray-400 mb-1">Intellectual honesty | Epistemic clarity</p>
             <p className="text-center text-xs text-gray-500 mb-4">Submit a question below.</p>
-
             <form className="flex flex-col gap-4" onSubmit={async (e) => {
               e.preventDefault();
               setLoading(true);
@@ -179,7 +203,11 @@ function App() {
                         : value
                     ])
                   );
-                  setResponse(cleanResponse);
+                  setResponse({
+                    ...cleanResponse,
+                    domains: data.domains || []
+                  });
+                  
                 } else {
                   setResponse({ error: data.error || "Unexpected response format from analysis engine." });
                 }
@@ -206,22 +234,43 @@ function App() {
               </button>
             </form>
 
-            {response && (
-              <div className="mt-6 bg-gray-800 p-4 rounded-md text-gray-200 text-sm space-y-6">
+            {response.domains?.length > 0 && (
+              <div className="mb-3">
+                <p className="text-xs text-gray-400">Dialectical domain(s) detected:</p>
+                <div className="mt-1 flex flex-wrap gap-2">
+                  {response.domains.map((domain, idx) => (
+                    <span key={idx} className="bg-indigo-700 text-white text-xs px-2 py-1 rounded-full">
+                      {domain}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            
                 {response.error ? (
                   <div className="text-red-400 font-semibold">⚠️ {response.error}</div>
                 ) : (
                   <>
-                    <h3 className="font-bold text-indigo-400 mb-1">Step 1</h3>
-                    <p>{response.step1_summary}</p>
-                    <h3 className="font-bold text-indigo-400 mb-1">Step 2</h3>
-                    <p>{response.step2_summary}</p>
-                    <h3 className="font-bold text-indigo-400 mb-1">Step 3</h3>
-                    <p>{response.step3_summary}</p>
-                    <h3 className="font-bold text-indigo-400 mb-1">Step 4</h3>
-                    <p>{response.step4_summary}</p>
+                    <h3 className="font-bold text-indigo-400 mb-1">Step 0 - Input Reflection</h3>
+                    <p>{response.step0_reflection}</p>
+                    
+                    <h3 className="font-bold text-indigo-400 mb-1">Step 1 - Ontological and Epistemic Disambiguation</h3>
+                    <p>{cleanSummary(response.step1_summary, 'Ontological and Epistemic Disambiguation')}</p>
+
+                    <h3 className="font-bold text-indigo-400 mb-1">Step 2 - Dialectical Tension</h3>
+                    <p><strong>Thesis:</strong> {response.step2_summary?.split("Antithesis:")[0].replace("Thesis:", "").replace("Dialectical Tension (Thesis, Antithesis, Synthesis)", "").trim()}</p>
+                    <p><strong>Antithesis:</strong> {response.step2_summary?.split("Antithesis:")[1]?.split("Synthesis:")[0].trim()}</p>
+                    <p><strong>Synthesis:</strong> {response.step2_summary?.split("Synthesis:")[1]?.trim()}</p>
+
+                    <h3 className="font-bold text-indigo-400 mb-1">Step 3 - Contextual Evaluation</h3>
+                    <p className="font-normal">{cleanSummary(response.step3_summary, 'Contextual Evaluation')}</p>
+
+                    <h3 className="font-bold text-indigo-400 mb-1">Step 4 - Theoretical Resolution</h3>
+                    <p>{cleanSummary(response.step4_summary, 'Structured Resolution')}</p>
+
                     <h3 className="font-bold text-green-400 mb-1">Reformulated Question</h3>
                     <p>{response.final_output}</p>
+
                     {response.example_output && (
                       <div>
                         <h4 className="font-semibold text-gray-300 mb-1">Illustrative Example</h4>
