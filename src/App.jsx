@@ -78,8 +78,8 @@ function App() {
         <div className="flex flex-col items-center gap-3">
           <input
             type="password"
-            className="w-64 px-4 py-2 rounded-md text-black text-center border border-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Enter password"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 text-black text-center shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
