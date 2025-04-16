@@ -199,112 +199,119 @@ function App() {
 
   if (stage === 'input') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white relative">
-        <div className="fixed top-2 left-4 text-xs text-yellow-400 z-50 bg-gray-900 px-3 py-1 rounded shadow">
-          {UPDATE_NOTICE}
-        </div>
-        <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
-          {DAT_VERSION}
-        </div>
-        <div className="bg-gray-900 p-6 rounded-xl shadow-md w-full max-w-3xl">
-          <div className="flex flex-col items-center mb-6">
-            <Logo className="w-32 h-auto" />
+      <LayoutWrapper>
+        <div className="min-h-screen bg-gray-950 text-white py-12 relative">
+          <div className="fixed top-2 left-4 text-xs text-yellow-400 z-50 bg-gray-900 px-3 py-1 rounded shadow">
+            {UPDATE_NOTICE}
           </div>
-          <h1 className="text-xl font-bold text-center mb-2">Dialectical Analysis Theory™ (DAT)</h1>
-          <p className="text-center text-sm text-gray-400 mb-1">Intellectual honesty | Epistemic clarity</p>
-          <p className="text-center text-xs text-gray-500 mb-4">Submit a question below.</p>
-
-          <form className="flex flex-col gap-4" onSubmit={async (e) => {
-            e.preventDefault();
-            setLoading(true);
-            setResponse(null);
-            try {
-              const res = await fetch('https://dialectix-backend-clean.azurewebsites.net/analyze', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: query })
-              });
-              const data = await res.json();
-              if (res.ok && data.response) {
-                const cleanResponse = Object.fromEntries(
-                  Object.entries(data.response).map(([key, value]) => [
-                    key,
-                    typeof value === 'string'
-                      ? value.replace(/\*\*/g, '').replace(/\*/g, '\n\n')
-                      : value
-                  ])
-                );
-                setResponse({ ...cleanResponse, domains: data.domains || [] });
-              } else {
-                setResponse({ error: data.error || "Unexpected response format from analysis engine." });
-              }
-            } catch (err) {
-              console.error(err);
-              setResponse({ error: "Server error. Please try again later." });
-            } finally {
-              setLoading(false);
-            }
-          }}>
-            <textarea
-              placeholder="Type your question here..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="min-h-[9rem] resize-none p-3 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
-            />
-            <button
-              type="submit"
-              className={`py-2 rounded-md font-semibold transition text-white ${loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500'}`}
-              disabled={loading}
-            >
-              {loading ? 'Processing...' : 'Submit Question'}
-            </button>
-          </form>
-
-          {response?.domains?.length > 0 && (
-            <div className="mt-3">
-              <p className="text-xs text-gray-400">Dialectical domain(s) detected:</p>
-              <div className="mt-1 flex flex-wrap gap-2">
-                {response.domains.map((domain, idx) => (
-                  <span key={idx} className="bg-indigo-700 text-white text-xs px-2 py-1 rounded-full">
-                    {domain}
-                  </span>
-                ))}
-              </div>
+          <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
+            {DAT_VERSION}
+          </div>
+  
+          <div className="bg-gray-900 p-6 rounded-xl shadow-md">
+            <div className="flex flex-col items-center mb-6">
+              <Logo className="w-32 h-auto" />
             </div>
-          )}
-
-          {response?.error ? (
-            <div className="text-red-400 font-semibold mt-4">⚠️ {response.error}</div>
-          ) : (
-            response && (
-              <div className="mt-6 space-y-4">
-                <Section title="Step 0 - Input Reflection" text={cleanSummary(response.step0_reflection, 'Step 0 - Input Reflection')} />
-                <Section title="Step 1 - Ontological and Epistemic Disambiguation" text={cleanSummary(response.step1_summary, 'Ontological and Epistemic Disambiguation')} />
-                <Section title="Step 2 - Dialectical Tension" text={renderDialectical(response.step2_summary)} />
-                <Section title="Step 3 - Contextual Evaluation" text={cleanSummary(response.step3_summary, 'Contextual Evaluation')} />
-                <Section title="Step 4 - Theoretical Resolution" text={cleanSummary(response.step4_summary, 'Structured Resolution')} />
-                <Section title="Reformulated Question" text={response.final_output} highlight />
-                {response.example_output && (
-                  <Section title="Illustrative Example" text={response.example_output} subtle />
-                )}
+  
+            <h1 className="text-xl font-bold text-center mb-2">Dialectical Analysis Theory{TM} (DAT)</h1>
+            <p className="text-center text-sm text-gray-400 mb-1">Intellectual honesty | Epistemic clarity</p>
+            <p className="text-center text-xs text-gray-500 mb-4">Submit a question below.</p>
+  
+            <form className="flex flex-col gap-4" onSubmit={async (e) => {
+              e.preventDefault();
+              setLoading(true);
+              setResponse(null);
+              try {
+                const res = await fetch('https://dialectix-backend-clean.azurewebsites.net/analyze', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ text: query })
+                });
+                const data = await res.json();
+                if (res.ok && data.response) {
+                  const cleanResponse = Object.fromEntries(
+                    Object.entries(data.response).map(([key, value]) => [
+                      key,
+                      typeof value === 'string'
+                        ? value.replace(/\*\*/g, '').replace(/\*/g, '\n\n')
+                        : value
+                    ])
+                  );
+                  setResponse({ ...cleanResponse, domains: data.domains || [] });
+                } else {
+                  setResponse({ error: data.error || "Unexpected response format from analysis engine." });
+                }
+              } catch (err) {
+                console.error(err);
+                setResponse({ error: "Server error. Please try again later." });
+              } finally {
+                setLoading(false);
+              }
+            }}>
+              <textarea
+                placeholder="Type your question here..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="min-h-[9rem] resize-none p-3 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                required
+              />
+              <button
+                type="submit"
+                className={`py-2 rounded-md font-semibold transition text-white ${loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500'}`}
+                disabled={loading}
+              >
+                {loading ? 'Processing...' : 'Submit Question'}
+              </button>
+            </form>
+  
+            {response?.domains?.length > 0 && (
+              <div className="mt-3">
+                <p className="text-xs text-gray-400">Dialectical domain(s) detected:</p>
+                <div className="mt-1 flex flex-wrap gap-2">
+                  {response.domains.map((domain, idx) => (
+                    <span key={idx} className="bg-indigo-700 text-white text-xs px-2 py-1 rounded-full">
+                      {domain}
+                    </span>
+                  ))}
+                </div>
               </div>
-            )
-          )}
+            )}
+  
+            {response?.error ? (
+              <div className="text-red-400 font-semibold mt-4">⚠️ {response.error}</div>
+            ) : (
+              response && (
+                <div className="mt-6 space-y-4">
+                  <Section title="Step 0 - Input Reflection" text={cleanSummary(response.step0_reflection, 'Step 0 - Input Reflection')} />
+                  <Section title="Step 1 - Ontological and Epistemic Disambiguation" text={cleanSummary(response.step1_summary, 'Ontological and Epistemic Disambiguation')} />
+                  <Section title="Step 2 - Dialectical Tension" text={renderDialectical(response.step2_summary)} />
+                  <Section title="Step 3 - Contextual Evaluation" text={cleanSummary(response.step3_summary, 'Contextual Evaluation')} />
+                  <Section title="Step 4 - Theoretical Resolution" text={cleanSummary(response.step4_summary, 'Structured Resolution')} />
+                  <Section title="Reformulated Question" text={response.final_output} highlight />
+                  {response.example_output && (
+                    <Section title="Illustrative Example" text={response.example_output} subtle />
+                  )}
+                </div>
+              )
+            )}
+          </div>
+  
+          <div className="fixed bottom-6 left-6 bg-gray-800 text-gray-300 px-4 py-2 rounded-lg text-xs shadow-lg">
+            Session expires in: <span className="text-white font-semibold">{formatTime(secondsLeft)}</span>
+          </div>
+  
+          <a
+            href="mailto:DAT@dialectix.com.au?subject=DAT App Feedback"
+            className="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-500 text-white text-xs md:text-sm px-4 py-2 rounded-full shadow-lg transition"
+            title="Send feedback about your experience"
+          >
+            Feedback
+          </a>
         </div>
-        <div className="fixed bottom-6 left-6 bg-gray-800 text-gray-300 px-4 py-2 rounded-lg text-xs shadow-lg">
-          Session expires in: <span className="text-white font-semibold">{formatTime(secondsLeft)}</span>
-        </div>
-        <a
-          href="mailto:DAT@dialectix.com.au?subject=DAT App Feedback"
-          className="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-500 text-white text-xs md:text-sm px-4 py-2 rounded-full shadow-lg transition"
-          title="Send feedback about your experience"
-        >
-          Feedback
-        </a>
-      </div>
+      </LayoutWrapper>
     );
   }
+  
 
   return null;
 }
