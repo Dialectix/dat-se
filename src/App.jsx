@@ -63,31 +63,31 @@ function App() {
 
   if (!authenticated) {
     return (
-      <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
-        <Logo spacing="about" />
-        <div className="bg-gray-900 border border-gray-700 shadow-lg rounded-xl p-6 w-full max-w-md space-y-6">
-          <div className="flex flex-col items-center text-white space-y-2">
-            <h1 className="text-2xl md:text-3xl font-semibold text-center tracking-wide">
-              Dialectical Analysis Theory{TM} (DAT)
+      <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 py-10">
+        <div className="w-full max-w-md bg-gray-900 border border-indigo-500 rounded-2xl shadow-2xl p-8 space-y-6">
+          <div className="flex flex-col items-center space-y-3">
+            <Logo spacing="about" />
+            <h1 className="text-3xl font-bold text-white text-center drop-shadow">
+              Dialectical Analysis Theory{TM}
             </h1>
-            <p className="text-sm md:text-base text-center text-gray-400 mt-1">
+            <p className="text-center text-gray-400 text-sm font-medium">
               Designed to challenge your thinking by guiding you to ask the right questions.
             </p>
           </div>
   
-          <div className="space-y-4">
-            <h2 className="text-base font-medium text-center text-gray-300">
+          <div className="space-y-4 pt-2">
+            <label className="block text-center text-gray-300 text-base font-semibold">
               Enter Access Password
-            </h2>
+            </label>
             <input
               type="password"
-              className="w-full px-4 py-2 rounded-md text-black text-center border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-3 rounded-lg text-black text-center border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-md text-base font-semibold shadow transition"
+              className="w-full py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 shadow-lg transition"
               onClick={() => {
                 if (password === "dialectix2025") {
                   sessionStorage.clear();
@@ -106,6 +106,7 @@ function App() {
       </div>
     );
   }
+  
   
 
   if (stage === 'about') {
