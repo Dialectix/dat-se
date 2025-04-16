@@ -65,7 +65,7 @@ function App() {
     return (
       <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
         <Logo spacing="about" />
-      
+  
         <div className="flex flex-col items-center text-white mb-8">
           <h1 className="text-2xl md:text-3xl font-semibold text-center tracking-wide mb-2">
             Dialectical Analysis Theory{TM} (DAT)
@@ -74,23 +74,20 @@ function App() {
             Designed to challenge your thinking by guiding you to ask the right questions.
           </p>
         </div>
-      
-        {/* Password Form */}
-        <div className="w-full max-w-xs bg-gray-900 p-6 rounded-xl shadow-md space-y-4">
-          <div className="text-left">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
-              Enter Access Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              className="w-full px-3 py-2 rounded-md text-black border border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-      
+  
+        {/* Centered Auth Box */}
+        <div className="bg-gray-900 p-6 rounded-xl shadow-md w-[320px] space-y-4">
+          <label htmlFor="password" className="block text-sm font-medium text-gray-300 text-center">
+            Enter Access Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            className="w-full px-3 py-2 rounded-md text-black border border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <button
             onClick={() => {
               if (password === "dialectix66") {
@@ -108,9 +105,9 @@ function App() {
           </button>
         </div>
       </div>
-      
     );
   }
+  
   
   if (stage === 'about') {
     return (
