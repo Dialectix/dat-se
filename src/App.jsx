@@ -65,27 +65,35 @@ function App() {
     return (
       <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
         <Logo spacing="about" />
-        <div className="flex flex-col items-center text-white mb-6">
-          <h1 className="text-xl md:text-2xl font-semibold text-center tracking-wide">
+      
+        <div className="flex flex-col items-center text-white mb-8">
+          <h1 className="text-2xl md:text-3xl font-semibold text-center tracking-wide mb-2">
             Dialectical Analysis Theory{TM} (DAT)
           </h1>
-          <p className="text-sm md:text-base text-center text-gray-300 mt-2 max-w-xs">
+          <p className="text-sm md:text-base text-center text-gray-300 max-w-xs">
             Designed to challenge your thinking by guiding you to ask the right questions.
           </p>
         </div>
-        <h2 className="text-lg mb-2 font-semibold">Enter Access Password</h2>
-        <div className="w-full max-w-xs space-y-2">
-          <input
-            type="password"
-            className="p-2 w-full rounded text-black text-center border border-gray-400 shadow"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+      
+        {/* Password Form */}
+        <div className="w-full max-w-xs bg-gray-900 p-6 rounded-xl shadow-md space-y-4">
+          <div className="text-left">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
+              Enter Access Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="w-full px-3 py-2 rounded-md text-black border border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+      
           <button
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded font-semibold shadow transition"
             onClick={() => {
-              if (password === "dialectix2025") {
+              if (password === "dialectix66") {
                 sessionStorage.clear();
                 setResponse(null);
                 setAuthenticated(true);
@@ -94,12 +102,13 @@ function App() {
                 alert("Incorrect password.");
               }
             }}
+            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-md font-semibold shadow transition"
           >
             Unlock
           </button>
         </div>
-        
       </div>
+      
     );
   }
   
