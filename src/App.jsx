@@ -132,43 +132,47 @@ function App() {
     );
   }
   
-  
-
   if (stage === 'about') {
-    return (
-      <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
-        <div className="fixed top-2 left-4 text-xs text-yellow-400 z-50 bg-gray-900 px-3 py-1 rounded shadow">
-          {UPDATE_NOTICE}
-        </div>
-        <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
-          {DAT_VERSION}
-        </div>
-        <div className="mt-20 mb-6">
-          <Logo className="w-32 h-auto mx-auto mb-8" />
-        </div>
-        <div className="max-w-3xl mx-auto space-y-6 text-gray-300 leading-snug text-base md:text-lg">
-          <h1 className="text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
-            Dialectical Analysis Theory™ (DAT)
-          </h1>
-          <blockquote className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
-            DAT is not fast. It is precise. It is not generative. It is analytical.<br />
-            It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
-          </blockquote>
-          <p>
-            Dialectical Analysis Theory™ is not an instrument for generating answers — it is a structure for exposing them.
-          </p>
-          <div className="flex justify-center pt-6">
-            <button
-              onClick={() => setStage('intro')}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded text-lg font-semibold shadow-md"
-            >
-              Begin Dialectical Analysis
-            </button>
+      return (
+        <>
+          <div className="fixed top-2 left-4 text-xs text-yellow-400 z-50 bg-gray-900 px-3 py-1 rounded shadow">
+            {UPDATE_NOTICE}
           </div>
-        </div>
-      </div>
-    );
-  }
+          <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
+            {DAT_VERSION}
+          </div>
+          <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
+            <div className="mt-20 mb-4">
+              <Logo />
+            </div>
+            <div className="max-w-3xl mx-auto space-y-5 text-left text-gray-300 leading-snug text-base md:text-lg">
+              <h1 className="text-2xl md:text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
+                Dialectical Analysis Theory{TM} (DAT)
+              </h1>
+              <div className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
+                DAT is not fast. It is precise. It is not generative. It is analytical.  
+                <br />It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
+              </div>
+              <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them. It interrogates contradictions, not by erasing them, but renders them explicit, testable, and epistemically justified.</p>
+              <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages: contradiction validation, synthesis testing, structural transformation, and theoretical resolution. At each step, DAT demands precision: ontological clarity, epistemic categorisation, and full structural containment.</p>
+              <p>Where other systems summarise or infer, DAT refuses to compress. No step is skipped. No assumption goes unexamined. No contradiction is allowed to resolve prematurely.</p>
+              <p>Language often masks contradiction. DAT disciplines the argument, slows down thought, dissects claims, and evaluates the line of enquiry across domains — mathematical, empirical, symbolic, phenomenological.</p>
+              <p>In an age of cognitive clutter and heuristic shortcuts, DAT is not a generative agent — it is a reasoning engine. It retools LLMs to think dialectically, ensuring outputs are traceable, structured, and defensible.</p>
+              <p>Whether the question is about causality, consciousness, ethics, or the limits of logic itself, DAT does not aim to decide what is true. It determines whether an argument holds — and under what conditions it must change.</p>
+              <div className="flex justify-center pt-4">
+                <button
+                  onClick={() => setStage('intro')}
+                  className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded text-lg font-semibold shadow-md"
+                >
+                  Begin Dialectical Analysis
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+  
 
   if (stage === 'intro') {
     return (
