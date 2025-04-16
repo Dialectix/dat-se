@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { LandingText } from "./LandingText";
 import Logo from './components/Logo';
 
-// Helper to remove redundant prefixes
 function cleanSummary(text, label) {
+  if (!text || typeof text !== 'string') return text;
   const prefix = label.toLowerCase();
-  if (text?.toLowerCase().startsWith(prefix)) {
-    return text.slice(label.length).trimStart();
-  }
-  return text;
+  const lower = text.toLowerCase();
+  return lower.startsWith(prefix)
+    ? text.slice(label.length).trimStart()
+    : text;
 }
 
 function App() {
@@ -252,7 +252,7 @@ function App() {
               response && (
                 <>
                   <h3 className="font-bold text-indigo-400 mb-1">Step 0 - Input Reflection</h3>
-                  <p>{response.step0_reflection}</p>
+                  <p>{cleanSummary(response.step0_reflection, 'Step 0 - Input Reflection')}</p>
 
                   <h3 className="font-bold text-indigo-400 mb-1">Step 1 - Ontological and Epistemic Disambiguation</h3>
                   <p>{cleanSummary(response.step1_summary, 'Ontological and Epistemic Disambiguation')}</p>
