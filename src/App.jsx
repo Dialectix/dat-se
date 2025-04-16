@@ -45,6 +45,8 @@ function App() {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const timeoutRef = useRef(null);
+  const TM = <span className="align-super text-[10px] ml-0.5 opacity-70">™</span>;
+
 
   const DAT_ENGINE_VERSION = "DAT Engine v3.6";
   const UI_BUILD_VERSION = "UI Build v1.3 (20250416)";
