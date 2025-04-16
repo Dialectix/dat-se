@@ -64,16 +64,47 @@ function App() {
 
   if (!authenticated) {
     return (
-      <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
+      <div className="min-h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
         <Logo spacing="about" />
+  
         <div className="flex flex-col items-center text-white mb-8">
-          <h1 className="text-3xl font-bold text-center tracking-wide">
+          <h1 className="text-2xl md:text-3xl font-semibold text-center tracking-wide">
             Dialectical Analysis Theory{TM} (DAT)
           </h1>
-          <p className="text-base text-center text-gray-300 mt-2 max-w-xs">
+          <p className="text-sm md:text-base text-center text-gray-300 mt-2 max-w-xs">
             Designed to challenge your thinking by guiding you to ask the right questions.
           </p>
         </div>
+  
+        <div className="w-full max-w-sm bg-gray-900 px-6 py-8 rounded-2xl shadow-2xl flex flex-col gap-6 items-center">
+          <h2 className="text-lg font-semibold text-gray-200">Access Portal</h2>
+          <input
+            type="password"
+            className="w-full px-4 py-3 rounded-md bg-white text-gray-800 text-sm border border-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-md text-sm font-semibold shadow transition duration-300"
+            onClick={() => {
+              if (password === "dialectix66") {
+                sessionStorage.clear();
+                setResponse(null);
+                setAuthenticated(true);
+                setTimeout(() => setStage("about"), 0);
+              } else {
+                alert("Incorrect password.");
+              }
+            }}
+          >
+            Unlock
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
 
         <div className="w-full max-w-sm bg-gray-900 px-8 py-8 rounded-3xl shadow-2xl flex flex-col gap-6 items-center">
           <h2 className="text-xl font-semibold text-gray-100 tracking-wide">Access Portal</h2>
