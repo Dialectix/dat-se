@@ -63,53 +63,46 @@ function App() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8 w-full max-w-md shadow-xl">
-          <div className="flex flex-col items-center space-y-6">
-            <Logo spacing="about" />
+      <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
+        <Logo spacing="about" />
+        <div className="flex flex-col items-center text-white mb-6">
+          <h1 className="text-xl md:text-2xl font-semibold text-center tracking-wide">
+            Dialectical Analysis Theory{TM} (DAT)
+          </h1>
+          <p className="text-sm md:text-base text-center text-gray-300 mt-2 max-w-xs">
+            Designed to challenge your thinking by guiding you to ask the right questions.
+          </p>
+        </div>
   
-            <div className="text-center">
-              <h1 className="text-2xl font-bold text-white">
-                Dialectical Analysis Theory{TM} (DAT)
-              </h1>
-              <p className="text-sm text-gray-400 mt-2">
-                Designed to challenge your thinking by guiding you to ask the right questions.
-              </p>
-            </div>
-  
-            <div className="w-full space-y-4">
-              <label htmlFor="password" className="block text-center text-gray-300 font-medium text-sm">
-                Enter Access Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                className="w-full px-4 py-3 rounded-lg text-sm text-black border border-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button
-                onClick={() => {
-                  if (password === "dialectix66") {
-                    sessionStorage.clear();
-                    setResponse(null);
-                    setAuthenticated(true);
-                    setTimeout(() => setStage("about"), 0);
-                  } else {
-                    alert("Incorrect password.");
-                  }
-                }}
-                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-lg font-semibold shadow-md transition"
-              >
-                Unlock
-              </button>
-            </div>
-          </div>
+        <h2 className="text-lg mb-3 font-semibold">Enter Access Password</h2>
+        <div className="flex flex-col items-center gap-3">
+          <input
+            type="password"
+            className="w-64 px-4 py-2 rounded-md text-black text-center border border-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            className="w-64 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-md font-semibold shadow transition"
+            onClick={() => {
+              if (password === "dialectix66") {
+                sessionStorage.clear();
+                setResponse(null);
+                setAuthenticated(true);
+                setTimeout(() => setStage("about"), 0);
+              } else {
+                alert("Incorrect password.");
+              }
+            }}
+          >
+            Unlock
+          </button>
         </div>
       </div>
     );
   }
+  
   
   
   
