@@ -74,16 +74,16 @@ function App() {
           </p>
         </div>
         <h2 className="text-lg mb-2 font-semibold">Enter Access Password</h2>
-        <div className="w-full max-w-xs">
+        <div className="w-full max-w-xs space-y-2">
           <input
             type="password"
-            className="p-2 rounded text-black mb-4 w-full text-center border border-gray-400"
+            className="p-2 w-full rounded text-black text-center border border-gray-400 shadow"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
-            className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 w-full rounded font-semibold"
+            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded font-semibold shadow transition"
             onClick={() => {
               if (password === "dialectix2025") {
                 sessionStorage.clear();
@@ -98,6 +98,7 @@ function App() {
             Unlock
           </button>
         </div>
+        
       </div>
     );
   }
