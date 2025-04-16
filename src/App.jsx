@@ -85,26 +85,32 @@ function App() {
   if (!authenticated) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
-        <Logo spacing="about" />
-        <div className="flex flex-col items-center text-white mb-8">
-          <h1 className="text-2xl md:text-3xl font-semibold text-center tracking-wide">
-            Dialectical Analysis Theory™ (DAT)
+        <div className="max-w-md w-full bg-gray-900 rounded-2xl shadow-2xl px-8 py-10 flex flex-col items-center gap-6">
+          <h1 className="text-2xl md:text-3xl font-bold text-center text-white">
+            Dialectical Analysis Theory<span className="align-super text-[10px] ml-0.5 opacity-70">™</span> (DAT)
           </h1>
-          <p className="text-sm md:text-base text-center text-gray-300 mt-2 max-w-xs">
+          <p className="text-sm md:text-base text-center text-gray-400 leading-snug max-w-sm">
             Designed to challenge your thinking by guiding you to ask the right questions.
           </p>
-        </div>
-        <div className="w-full max-w-sm bg-gray-900 px-6 py-8 rounded-2xl shadow-2xl flex flex-col gap-6 items-center">
-          <h2 className="text-lg font-semibold text-gray-200">Access Portal</h2>
-          <input
-            type="password"
-            className="w-full px-4 py-3 rounded-md bg-white text-gray-800 text-sm border border-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+      
+          <div className="w-full text-center">
+            <h2 className="text-md font-semibold text-gray-200 mb-2">Enter Access Password</h2>
+            <div className="relative">
+              <input
+                type="password"
+                className="w-full px-4 py-3 pr-10 rounded-lg bg-white text-gray-800 text-sm border border-gray-300 shadow focus:outline-none focus:ring-2 focus:ring-violet-500"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                🔑
+              </div>
+            </div>
+          </div>
+      
           <button
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-md text-sm font-semibold shadow transition duration-300"
+            className="w-full bg-violet-600 hover:bg-violet-500 text-white py-2.5 rounded-lg text-sm font-semibold transition duration-300 shadow-md"
             onClick={() => {
               if (password === "dialectix66") {
                 sessionStorage.clear();
@@ -119,6 +125,7 @@ function App() {
           </button>
         </div>
       </div>
+      
     );
   }
 
