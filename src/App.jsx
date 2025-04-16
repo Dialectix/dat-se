@@ -20,8 +20,9 @@ function App() {
   const [password, setPassword] = useState('');
   const [secondsLeft, setSecondsLeft] = useState(900);
   const timeoutRef = useRef(null);
+
   const DAT_ENGINE_VERSION = "DAT Engine v3.6";
-  const UI_BUILD_VERSION = "UI Build v1.2 (20250415)";
+  const UI_BUILD_VERSION = "UI Build v1.3 (20250416)";
   const TM = <span className="align-super text-[10px] ml-0.5 opacity-70">™</span>;
   const DAT_VERSION = `${DAT_ENGINE_VERSION} | ${UI_BUILD_VERSION}`;
   const UPDATE_NOTICE = "⚠️ Updates may occur without notice.";
@@ -65,27 +66,26 @@ function App() {
     return (
       <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
         <Logo spacing="about" />
-  
-        <div className="flex flex-col items-center text-white mb-6">
-          <h1 className="text-2xl md:text-3xl font-semibold text-center tracking-wide">
+        <div className="flex flex-col items-center text-white mb-8">
+          <h1 className="text-3xl font-bold text-center tracking-wide">
             Dialectical Analysis Theory{TM} (DAT)
           </h1>
-          <p className="text-sm md:text-base text-center text-gray-300 mt-2 max-w-xs">
+          <p className="text-base text-center text-gray-300 mt-2 max-w-xs">
             Designed to challenge your thinking by guiding you to ask the right questions.
           </p>
         </div>
-  
-        <h2 className="text-lg font-semibold mb-3">Enter Access Password</h2>
-        <div className="w-[300px] bg-gray-900 p-6 rounded-2xl shadow-lg flex flex-col gap-4 items-center">
+
+        <div className="w-full max-w-sm bg-gray-900 px-8 py-8 rounded-3xl shadow-2xl flex flex-col gap-6 items-center">
+          <h2 className="text-xl font-semibold text-gray-100 tracking-wide">Access Portal</h2>
           <input
             type="password"
-            className="w-full px-4 py-3 rounded-2xl text-black text-center text-base border border-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-5 py-3 rounded-xl bg-white text-gray-900 text-base border border-gray-300 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-2xl text-base font-semibold shadow transition"
+            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-xl text-base font-semibold shadow-md transition duration-300"
             onClick={() => {
               if (password === "dialectix66") {
                 sessionStorage.clear();
@@ -103,8 +103,7 @@ function App() {
       </div>
     );
   }
-  
-  
+
   if (stage === 'about') {
     return (
       <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
@@ -114,19 +113,21 @@ function App() {
         <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
           {DAT_VERSION}
         </div>
-        <div className="mt-20 mb-4">
+        <div className="mt-20 mb-6">
           <Logo className="w-32 h-auto mx-auto mb-8" />
         </div>
-        <div className="max-w-3xl mx-auto space-y-5 text-left text-gray-300 leading-snug text-base md:text-lg">
-          <h1 className="text-2xl md:text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
+        <div className="max-w-3xl mx-auto space-y-6 text-gray-300 leading-snug text-base md:text-lg">
+          <h1 className="text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
             Dialectical Analysis Theory{TM} (DAT)
           </h1>
-          <div className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
-            DAT is not fast. It is precise. It is not generative. It is analytical.
-            <br />It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
-          </div>
-          <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them...</p>
-          <div className="flex justify-center pt-4">
+          <blockquote className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
+            DAT is not fast. It is precise. It is not generative. It is analytical.<br/>
+            It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
+          </blockquote>
+          <p>
+            Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them. Your question is not something you ask the world — it is the beginning of your responsibility to it.
+          </p>
+          <div className="flex justify-center pt-6">
             <button
               onClick={() => setStage('intro')}
               className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded text-lg font-semibold shadow-md"
@@ -169,13 +170,14 @@ function App() {
         <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
           {DAT_VERSION}
         </div>
-        <div className="bg-gray-900 p-6 rounded-xl shadow-md w-[600px]">
-          <div className="flex flex-col items-center mt-16 mb-6">
+        <div className="bg-gray-900 p-6 rounded-xl shadow-md w-full max-w-3xl">
+          <div className="flex flex-col items-center mb-6">
             <Logo className="w-32 h-auto" />
           </div>
           <h1 className="text-xl font-bold text-center mb-2">Dialectical Analysis Theory{TM} (DAT)</h1>
           <p className="text-center text-sm text-gray-400 mb-1">Intellectual honesty | Epistemic clarity</p>
           <p className="text-center text-xs text-gray-500 mb-4">Submit a question below.</p>
+
           <form className="flex flex-col gap-4" onSubmit={async (e) => {
             e.preventDefault();
             setLoading(true);
@@ -227,7 +229,7 @@ function App() {
           </form>
 
           {response?.domains?.length > 0 && (
-            <div className="mb-3">
+            <div className="mt-3">
               <p className="text-xs text-gray-400">Dialectical domain(s) detected:</p>
               <div className="mt-1 flex flex-wrap gap-2">
                 {response.domains.map((domain, idx) => (
@@ -240,37 +242,20 @@ function App() {
           )}
 
           {response?.error ? (
-            <div className="text-red-400 font-semibold">⚠️ {response.error}</div>
+            <div className="text-red-400 font-semibold mt-4">⚠️ {response.error}</div>
           ) : (
             response && (
-              <>
-                <h3 className="font-bold text-indigo-400 mb-1">Step 0 - Input Reflection</h3>
-                <p>{cleanSummary(response.step0_reflection, 'Step 0 - Input Reflection')}</p>
-
-                <h3 className="font-bold text-indigo-400 mb-1">Step 1 - Ontological and Epistemic Disambiguation</h3>
-                <p>{cleanSummary(response.step1_summary, 'Ontological and Epistemic Disambiguation')}</p>
-
-                <h3 className="font-bold text-indigo-400 mb-1">Step 2 - Dialectical Tension</h3>
-                <p><strong>Thesis:</strong> {response.step2_summary?.split("Antithesis:")[0]?.replace("Thesis:", "").replace("Dialectical Tension (Thesis, Antithesis, Synthesis)", "").trim()}</p>
-                <p><strong>Antithesis:</strong> {response.step2_summary?.split("Antithesis:")[1]?.split("Synthesis:")[0]?.trim()}</p>
-                <p><strong>Synthesis:</strong> {response.step2_summary?.split("Synthesis:")[1]?.trim()}</p>
-
-                <h3 className="font-bold text-indigo-400 mb-1">Step 3 - Contextual Evaluation</h3>
-                <p>{cleanSummary(response.step3_summary, 'Contextual Evaluation')}</p>
-
-                <h3 className="font-bold text-indigo-400 mb-1">Step 4 - Theoretical Resolution</h3>
-                <p>{cleanSummary(response.step4_summary, 'Structured Resolution')}</p>
-
-                <h3 className="font-bold text-green-400 mb-1">Reformulated Question</h3>
-                <p>{response.final_output}</p>
-
+              <div className="mt-6 space-y-4">
+                <Section title="Step 0 - Input Reflection" text={cleanSummary(response.step0_reflection, 'Step 0 - Input Reflection')} />
+                <Section title="Step 1 - Ontological and Epistemic Disambiguation" text={cleanSummary(response.step1_summary, 'Ontological and Epistemic Disambiguation')} />
+                <Section title="Step 2 - Dialectical Tension" text={renderDialectical(response.step2_summary)} />
+                <Section title="Step 3 - Contextual Evaluation" text={cleanSummary(response.step3_summary, 'Contextual Evaluation')} />
+                <Section title="Step 4 - Theoretical Resolution" text={cleanSummary(response.step4_summary, 'Structured Resolution')} />
+                <Section title="Reformulated Question" text={response.final_output} highlight />
                 {response.example_output && (
-                  <div>
-                    <h4 className="font-semibold text-gray-300 mb-1">Illustrative Example</h4>
-                    <p>{response.example_output}</p>
-                  </div>
+                  <Section title="Illustrative Example" text={response.example_output} subtle />
                 )}
-              </>
+              </div>
             )
           )}
         </div>
@@ -289,6 +274,30 @@ function App() {
   }
 
   return null;
+}
+
+function Section({ title, text, highlight, subtle }) {
+  return (
+    <div>
+      <h3 className={`font-bold mb-1 ${highlight ? 'text-green-400' : 'text-indigo-400'}`}>{title}</h3>
+      <p className={`${subtle ? 'text-sm text-gray-400' : ''}`}>{text}</p>
+    </div>
+  );
+}
+
+function renderDialectical(text) {
+  if (!text) return null;
+  const thesis = text.split("Antithesis:")[0]?.replace("Thesis:", "").replace("Dialectical Tension (Thesis, Antithesis, Synthesis)", "").trim();
+  const antithesis = text.split("Antithesis:")[1]?.split("Synthesis:")[0]?.trim();
+  const synthesis = text.split("Synthesis:")[1]?.trim();
+
+  return (
+    <div>
+      <p><strong>Thesis:</strong> {thesis}</p>
+      <p><strong>Antithesis:</strong> {antithesis}</p>
+      <p><strong>Synthesis:</strong> {synthesis}</p>
+    </div>
+  );
 }
 
 export default App;
