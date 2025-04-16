@@ -86,23 +86,22 @@ function App() {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
         <Logo className="w-36 md:w-44 h-auto mb-8" />
-        
-        <div className="max-w-md w-full bg-gray-900 rounded-2xl shadow-2xl px-8 py-10 flex flex-col items-center gap-6">
+  
+        <div className="bg-gray-900 px-8 py-10 rounded-2xl shadow-2xl flex flex-col items-center gap-6">
           <h1 className="text-2xl md:text-3xl font-bold text-center text-white">
             Dialectical Analysis Theory<span className="align-super text-[10px] ml-0.5 opacity-70">™</span> (DAT)
           </h1>
   
-          <p className="text-sm md:text-base text-center text-gray-400 leading-snug max-w-sm">
+          <p className="text-sm md:text-base text-center text-gray-400 leading-snug max-w-xs">
             Designed to challenge your thinking by guiding you to ask the right questions.
           </p>
   
-          <div className="w-full text-center">
+          <div className="text-center">
             <h2 className="text-md font-semibold text-gray-200 mb-2">Enter Access Password</h2>
-  
             <div className="relative">
               <input
                 type="password"
-                className="w-full px-4 py-3 pr-10 rounded-lg bg-white text-gray-800 text-sm border border-gray-300 shadow focus:outline-none focus:ring-2 focus:ring-violet-500"
+                className="w-[300px] px-4 py-3 pr-10 rounded-lg bg-white text-gray-800 text-sm border border-gray-300 shadow focus:outline-none focus:ring-2 focus:ring-violet-500"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -114,7 +113,7 @@ function App() {
           </div>
   
           <button
-            className="w-full bg-violet-600 hover:bg-violet-500 text-white py-2.5 rounded-lg text-sm font-semibold transition duration-300 shadow-md"
+            className="w-[300px] bg-violet-600 hover:bg-violet-500 text-white py-3 rounded-lg text-base font-semibold transition duration-300 shadow-md"
             onClick={() => {
               if (password === "dialectix66") {
                 sessionStorage.clear();
@@ -131,6 +130,7 @@ function App() {
       </div>
     );
   }
+  
   
 
   if (stage === 'about') {
