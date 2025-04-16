@@ -65,8 +65,9 @@ function App() {
     return (
       <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
         <Logo spacing="about" />
+  
         <div className="flex flex-col items-center text-white mb-6">
-          <h1 className="text-xl md:text-2xl font-semibold text-center tracking-wide">
+          <h1 className="text-2xl md:text-3xl font-semibold text-center tracking-wide">
             Dialectical Analysis Theory{TM} (DAT)
           </h1>
           <p className="text-sm md:text-base text-center text-gray-300 mt-2 max-w-xs">
@@ -74,18 +75,17 @@ function App() {
           </p>
         </div>
   
-        <h2 className="text-lg mb-3 font-semibold">Enter Access Password</h2>
-        <div className="flex flex-col items-center gap-3">
+        <h2 className="text-lg font-semibold mb-3">Enter Access Password</h2>
+        <div className="w-[300px] bg-gray-900 p-6 rounded-2xl shadow-lg flex flex-col gap-4 items-center">
           <input
             type="password"
-            className="w-64 px-5 py-3 rounded-xl text-black text-center text-base border border-gray-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-3 rounded-2xl text-black text-center text-base border border-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          
           <button
-            className="w-64 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-md font-semibold shadow transition"
+            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-2xl text-base font-semibold shadow transition"
             onClick={() => {
               if (password === "dialectix66") {
                 sessionStorage.clear();
@@ -103,8 +103,6 @@ function App() {
       </div>
     );
   }
-  
-  
   
   
   if (stage === 'about') {
