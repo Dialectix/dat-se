@@ -64,7 +64,7 @@ function App() {
   if (!authenticated) {
     return (
       <div className="h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
-        <Logo spacing="about" className="w-32 h-auto mb-6" />
+        <Logo spacing="about" />
         <div className="flex flex-col items-center text-white mb-6">
           <h1 className="text-xl md:text-2xl font-semibold text-center tracking-wide">
             Dialectical Analysis Theory{TM} (DAT)
@@ -99,6 +99,7 @@ function App() {
       </div>
     );
   }
+  
 
   if (stage === 'about') {
     return (
