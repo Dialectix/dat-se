@@ -47,7 +47,6 @@ function App() {
   const timeoutRef = useRef(null);
   const TM = <span className="align-super text-[10px] ml-0.5 opacity-70">™</span>;
 
-
   const DAT_ENGINE_VERSION = "DAT Engine v3.6";
   const UI_BUILD_VERSION = "UI Build v1.3 (20250416)";
   const DAT_VERSION = `${DAT_ENGINE_VERSION} | ${UI_BUILD_VERSION}`;
@@ -56,31 +55,28 @@ function App() {
   const resetTimer = () => setSecondsLeft(900);
 
   useEffect(() => {
-    if (authenticated) {
-      sessionStorage.setItem('stage', stage);
-    }
+    if (authenticated) sessionStorage.setItem('stage', stage);
   }, [stage, authenticated]);
 
   useEffect(() => {
-    if (authenticated) {
-      const handleActivity = () => resetTimer();
-      ['mousemove', 'keydown', 'click'].forEach(e => window.addEventListener(e, handleActivity));
-      timeoutRef.current = setInterval(() => {
-        setSecondsLeft(prev => {
-          if (prev <= 1) {
-            clearInterval(timeoutRef.current);
-            alert("Session expired. Please log in again.");
-            window.location.reload();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-      return () => {
-        ['mousemove', 'keydown', 'click'].forEach(e => window.removeEventListener(e, handleActivity));
-        clearInterval(timeoutRef.current);
-      };
-    }
+    if (!authenticated) return;
+    const handleActivity = () => resetTimer();
+    ['mousemove', 'keydown', 'click'].forEach(e => window.addEventListener(e, handleActivity));
+    timeoutRef.current = setInterval(() => {
+      setSecondsLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(timeoutRef.current);
+          alert("Session expired. Please log in again.");
+          window.location.reload();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => {
+      ['mousemove', 'keydown', 'click'].forEach(e => window.removeEventListener(e, handleActivity));
+      clearInterval(timeoutRef.current);
+    };
   }, [authenticated]);
 
   const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
@@ -89,16 +85,13 @@ function App() {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-gray-950 text-white px-4">
         <Logo className="w-36 md:w-44 h-auto mb-8" />
-  
         <div className="bg-gray-900 px-8 py-10 rounded-2xl shadow-2xl flex flex-col items-center gap-6">
           <h1 className="text-2xl md:text-3xl font-bold text-center text-white">
-            Dialectical Analysis Theory<span className="align-super text-[10px] ml-0.5 opacity-70">™</span> (DAT)
+            Dialectical Analysis Theory{TM} (DAT)
           </h1>
-  
           <p className="text-sm md:text-base text-center text-gray-400 leading-snug max-w-xs">
             Designed to challenge your thinking by guiding you to ask the right questions.
           </p>
-  
           <div className="text-center">
             <h2 className="text-md font-semibold text-gray-200 mb-2">Enter Access Password</h2>
             <div className="relative">
@@ -109,12 +102,9 @@ function App() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                🔑
-              </div>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">🔑</div>
             </div>
           </div>
-  
           <button
             className="w-[300px] bg-violet-600 hover:bg-violet-500 text-white py-3 rounded-lg text-base font-semibold transition duration-300 shadow-md"
             onClick={() => {
@@ -133,48 +123,48 @@ function App() {
       </div>
     );
   }
-  
+
   if (stage === 'about') {
-      return (
-        <>
-          <div className="fixed top-2 left-4 text-xs text-yellow-400 z-50 bg-gray-900 px-3 py-1 rounded shadow">
-            {UPDATE_NOTICE}
-          </div>
-          <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
-            {DAT_VERSION}
-          </div>
-          <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
-            <div className="mt-20 mb-4">
-              <Logo />
+    return (
+      <>
+        <div className="fixed top-2 left-4 text-xs text-yellow-400 z-50 bg-gray-900 px-3 py-1 rounded shadow">
+          {UPDATE_NOTICE}
+        </div>
+        <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
+          {DAT_VERSION}
+        </div>
+        <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
+          <div className="max-w-3xl mx-auto space-y-5 text-left text-gray-300 leading-snug text-base md:text-lg">
+            <div className="mt-20 mb-4 text-center">
+              <Logo className="mx-auto" />
             </div>
-            <div className="max-w-3xl mx-auto space-y-5 text-left text-gray-300 leading-snug text-base md:text-lg">
-              <h1 className="text-2xl md:text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
-                Dialectical Analysis Theory{TM} (DAT)
-              </h1>
-              <div className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
-                DAT is not fast. It is precise. It is not generative. It is analytical.  
-                <br />It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
-              </div>
-              <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them. It interrogates contradictions, not by erasing them, but renders them explicit, testable, and epistemically justified.</p>
-              <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages: contradiction validation, synthesis testing, structural transformation, and theoretical resolution. At each step, DAT demands precision: ontological clarity, epistemic categorisation, and full structural containment.</p>
-              <p>Where other systems summarise or infer, DAT refuses to compress. No step is skipped. No assumption goes unexamined. No contradiction is allowed to resolve prematurely.</p>
-              <p>Language often masks contradiction. DAT disciplines the argument, slows down thought, dissects claims, and evaluates the line of enquiry across domains — mathematical, empirical, symbolic, phenomenological.</p>
-              <p>In an age of cognitive clutter and heuristic shortcuts, DAT is not a generative agent — it is a reasoning engine. It retools LLMs to think dialectically, ensuring outputs are traceable, structured, and defensible.</p>
-              <p>Whether the question is about causality, consciousness, ethics, or the limits of logic itself, DAT does not aim to decide what is true. It determines whether an argument holds — and under what conditions it must change.</p>
-              <div className="flex justify-center pt-4">
-                <button
-                  onClick={() => setStage('intro')}
-                  className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded text-lg font-semibold shadow-md"
-                >
-                  Begin Dialectical Analysis
-                </button>
-              </div>
+            <h1 className="text-2xl md:text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
+              Dialectical Analysis Theory{TM} (DAT)
+            </h1>
+            <div className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
+              DAT is not fast. It is precise. It is not generative. It is analytical.
+              <br />
+              It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
+            </div>
+            <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them...</p>
+            <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages...</p>
+            <p>Where other systems summarise or infer, DAT refuses to compress. No step is skipped...</p>
+            <p>Language often masks contradiction. DAT disciplines the argument, slows down thought, dissects claims...</p>
+            <p>In an age of cognitive clutter and heuristic shortcuts, DAT is not a generative agent...</p>
+            <p>Whether the question is about causality, consciousness, ethics... DAT determines whether an argument holds...</p>
+            <div className="flex justify-center pt-4">
+              <button
+                onClick={() => setStage('intro')}
+                className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded text-lg font-semibold shadow-md"
+              >
+                Begin Dialectical Analysis
+              </button>
             </div>
           </div>
-        </>
-      );
-    }
-  
+        </div>
+      </>
+    );
+  }
 
   if (stage === 'intro') {
     return (
@@ -200,13 +190,12 @@ function App() {
   if (stage === 'input') {
     return (
       <div className="min-h-screen bg-gray-950 text-white py-12 px-4 flex justify-center items-start">
-        <div className="w-full max-w-xl bg-gray-900 p-6 rounded-xl shadow-lg space-y-6">
+        <div className="w-full max-w-2xl bg-gray-900 p-6 rounded-xl shadow-lg space-y-6">
           <div className="flex flex-col items-center">
             <Logo className="w-32 h-auto mb-4" />
             <h1 className="text-xl font-bold text-center">Dialectical Analysis Theory{TM} (DAT)</h1>
             <p className="text-sm text-gray-400 text-center">Intellectual honesty | Epistemic clarity</p>
           </div>
-  
           <form className="space-y-4" onSubmit={async (e) => {
             e.preventDefault();
             setLoading(true);
@@ -239,7 +228,7 @@ function App() {
             }
           }}>
             <textarea
-              className="w-full min-h-[8rem] p-3 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full min-h-[8rem] p-3 resize-none rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Type your question here..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -255,7 +244,6 @@ function App() {
               {loading ? 'Processing...' : 'Submit Question'}
             </button>
           </form>
-  
           {response?.domains?.length > 0 && (
             <div>
               <p className="text-xs text-gray-400">Dialectical domain(s) detected:</p>
@@ -268,7 +256,6 @@ function App() {
               </div>
             </div>
           )}
-  
           {response?.error ? (
             <div className="text-red-400 font-semibold">⚠️ {response.error}</div>
           ) : response && (
@@ -285,11 +272,9 @@ function App() {
             </div>
           )}
         </div>
-  
         <div className="fixed bottom-6 left-6 bg-gray-800 text-gray-300 px-4 py-2 rounded-lg text-xs shadow-lg">
           Session expires in: <span className="text-white font-semibold">{formatTime(secondsLeft)}</span>
         </div>
-  
         <a
           href="mailto:DAT@dialectix.com.au?subject=DAT App Feedback"
           className="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-500 text-white text-xs md:text-sm px-4 py-2 rounded-full shadow-lg transition"
@@ -300,7 +285,6 @@ function App() {
       </div>
     );
   }
-  
 
   return null;
 }
