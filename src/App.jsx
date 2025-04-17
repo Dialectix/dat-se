@@ -190,8 +190,8 @@ function App() {
   if (stage === 'input') {
     return (
       <div className="min-h-screen bg-gray-950 text-white py-12 px-4 flex justify-center items-start">
-        <div className="w-full max-w-2xl bg-gray-900 p-6 rounded-xl shadow-lg space-y-6">
-          <div className="flex flex-col items-center">
+        <div className="w-full max-w-md bg-gray-900 p-6 rounded-xl shadow-lg space-y-6">
+            <div className="flex flex-col items-center">
             <Logo className="w-32 h-auto mb-4" />
             <h1 className="text-xl font-bold text-center">Dialectical Analysis Theory{TM} (DAT)</h1>
             <p className="text-sm text-gray-400 text-center">Intellectual honesty | Epistemic clarity</p>
