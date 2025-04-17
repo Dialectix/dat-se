@@ -1,6 +1,6 @@
-import LayoutWrapper from "./LayoutWrapper";
+// import LayoutWrapper from "./LayoutWrapper";
 import { useState, useEffect, useRef } from 'react';
-import { LandingText } from "./LandingText";
+import { LandingText } from "./assets/LandingText";
 import Logo from './components/Logo';
 
 function cleanSummary(text, label) {
@@ -146,12 +146,12 @@ function App() {
               <br />
               It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
             </div>
-            <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them...</p>
-            <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages...</p>
-            <p>Where other systems summarise or infer, DAT refuses to compress. No step is skipped...</p>
-            <p>Language often masks contradiction. DAT disciplines the argument, slows down thought, dissects claims...</p>
-            <p>In an age of cognitive clutter and heuristic shortcuts, DAT is not a generative agent...</p>
-            <p>Whether the question is about causality, consciousness, ethics... DAT determines whether an argument holds...</p>
+             <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them. It interrogates contradictions, not by erasing them, but renders them explicit, testable, and epistemically justified.</p>
+                        <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages: contradiction validation, synthesis testing, structural transformation, and theoretical resolution. At each step, DAT demands precision: ontological clarity, epistemic categorisation, and full structural containment.</p>
+                        <p>Where other systems summarise or infer, DAT refuses to compress. No step is skipped. No assumption goes unexamined. No contradiction is allowed to resolve prematurely.</p>
+                        <p>Language often masks contradiction. DAT disciplines the argument, slows down thought, dissects claims, and evaluates the line of enquiry across domains — mathematical, empirical, symbolic, phenomenological.</p>
+                        <p>In an age of cognitive clutter and heuristic shortcuts, DAT is not a generative agent — it is a reasoning engine. It retools LLMs to think dialectically, ensuring outputs are traceable, structured, and defensible.</p>
+                        <p>Whether the question is about causality, consciousness, ethics, or the limits of logic itself, DAT does not aim to decide what is true. It determines whether an argument holds — and under what conditions it must change.</p>
             <div className="flex justify-center pt-4">
               <button
                 onClick={() => setStage('intro')}
@@ -191,7 +191,7 @@ function App() {
     return (
       <div className="min-h-screen bg-gray-950 text-white py-12 px-4 flex justify-center items-start">
         <div className="w-full max-w-md bg-gray-900 p-6 rounded-xl shadow-lg space-y-6">
-            <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center">
             <Logo className="w-32 h-auto mb-4" />
             <h1 className="text-xl font-bold text-center">Dialectical Analysis Theory{TM} (DAT)</h1>
             <p className="text-sm text-gray-400 text-center">Intellectual honesty | Epistemic clarity</p>
