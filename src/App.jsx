@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import LandingText from "./assets/LandingText";
 import Logo from './components/Logo';
-// TEMP: triggering redeploy for LandingText fix
 
 function cleanSummary(text, label) {
   if (!text || typeof text !== 'string') return text;
@@ -20,7 +19,7 @@ function renderDialectical(text) {
   const synthesis = text.split("Synthesis:")[1]?.trim();
 
   return (
-    <div>
+    <div className="space-y-2">
       <p><strong>Thesis:</strong> {thesis}</p>
       <p><strong>Antithesis:</strong> {antithesis}</p>
       <p><strong>Synthesis:</strong> {synthesis}</p>
@@ -30,9 +29,9 @@ function renderDialectical(text) {
 
 function Section({ title, text, highlight, subtle }) {
   return (
-    <div>
-      <h3 className={`font-bold mb-1 ${highlight ? 'text-green-400' : 'text-indigo-400'}`}>{title}</h3>
-      <p className={`${subtle ? 'text-sm text-gray-400' : ''}`}>{text}</p>
+    <div className="space-y-1">
+      <h3 className={`font-bold text-lg ${highlight ? 'text-green-400' : 'text-indigo-400'}`}>{title}</h3>
+      <p className={`${subtle ? 'text-sm text-gray-400' : 'text-gray-300 text-base'}`}>{text}</p>
     </div>
   );
 }
@@ -79,6 +78,11 @@ function App() {
       clearInterval(timeoutRef.current);
     };
   }, [authenticated]);
+
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    document.body.classList.add('bg-gray-950', 'text-white');
+  }, []);
 
   const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
 
@@ -127,43 +131,40 @@ function App() {
 
   if (stage === 'about') {
     return (
-      <>
+      <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
         <div className="fixed top-2 left-4 text-xs text-yellow-400 z-50 bg-gray-900 px-3 py-1 rounded shadow">
           {UPDATE_NOTICE}
         </div>
         <div className="fixed top-2 right-4 text-xs text-gray-400 z-50">
           {DAT_VERSION}
         </div>
-        <div className="min-h-screen bg-gray-950 text-white px-6 py-12 overflow-y-auto">
-          <div className="max-w-3xl mx-auto space-y-5 text-left text-gray-300 leading-snug text-base md:text-lg">
-            <div className="mt-20 mb-4 text-center">
-              <Logo className="mx-auto" />
-            </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
-              Dialectical Analysis Theory{TM} (DAT)
-            </h1>
-            <div className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
-              DAT is not fast. It is precise. It is not generative. It is analytical.
-              <br />
-              It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
-            </div>
-             <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them. It interrogates contradictions, not by erasing them, but renders them explicit, testable, and epistemically justified.</p>
-                        <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages: contradiction validation, synthesis testing, structural transformation, and theoretical resolution. At each step, DAT demands precision: ontological clarity, epistemic categorisation, and full structural containment.</p>
-                        <p>Where other systems summarise or infer, DAT refuses to compress. No step is skipped. No assumption goes unexamined. No contradiction is allowed to resolve prematurely.</p>
-                        <p>Language often masks contradiction. DAT disciplines the argument, slows down thought, dissects claims, and evaluates the line of enquiry across domains — mathematical, empirical, symbolic, phenomenological.</p>
-                        <p>In an age of cognitive clutter and heuristic shortcuts, DAT is not a generative agent — it is a reasoning engine. It retools LLMs to think dialectically, ensuring outputs are traceable, structured, and defensible.</p>
-                        <p>Whether the question is about causality, consciousness, ethics, or the limits of logic itself, DAT does not aim to decide what is true. It determines whether an argument holds — and under what conditions it must change.</p>
-            <div className="flex justify-center pt-4">
-              <button
-                onClick={() => setStage('intro')}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded text-lg font-semibold shadow-md"
-              >
-                Begin Dialectical Analysis
-              </button>
-            </div>
+        <div className="max-w-3xl mx-auto space-y-5 text-left text-gray-300 leading-snug text-base md:text-lg">
+          <div className="mt-20 mb-4 text-center">
+            <Logo className="mx-auto" />
+          </div>
+          <h1 className="text-2xl md:text-3xl font-bold text-center text-indigo-400 drop-shadow-sm">
+            Dialectical Analysis Theory{TM} (DAT)
+          </h1>
+          <div className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
+            DAT is not fast. It is precise. It is not generative. It is analytical.
+            <br />It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
+          </div>
+          <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them. It interrogates contradictions, not by erasing them, but renders them explicit, testable, and epistemically justified.</p>
+          <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages: contradiction validation, synthesis testing, structural transformation, and theoretical resolution. At each step, DAT demands precision: ontological clarity, epistemic categorisation, and full structural containment.</p>
+          <p>Where other systems summarise or infer, DAT refuses to compress. No step is skipped. No assumption goes unexamined. No contradiction is allowed to resolve prematurely.</p>
+          <p>Language often masks contradiction. DAT disciplines the argument, slows down thought, dissects claims, and evaluates the line of enquiry across domains — mathematical, empirical, symbolic, phenomenological.</p>
+          <p>In an age of cognitive clutter and heuristic shortcuts, DAT is not a generative agent — it is a reasoning engine. It retools LLMs to think dialectically, ensuring outputs are traceable, structured, and defensible.</p>
+          <p>Whether the question is about causality, consciousness, ethics, or the limits of logic itself, DAT does not aim to decide what is true. It determines whether an argument holds — and under what conditions it must change.</p>
+          <div className="flex justify-center pt-4">
+            <button
+              onClick={() => setStage('intro')}
+              className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded text-lg font-semibold shadow-md"
+            >
+              Begin Dialectical Analysis
+            </button>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
