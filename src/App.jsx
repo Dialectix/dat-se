@@ -1,7 +1,8 @@
 // import LayoutWrapper from "./LayoutWrapper";
 import { useState, useEffect, useRef } from 'react';
-import { LandingText } from "./assets/LandingText";
+import LandingText from "./assets/LandingText";
 import Logo from './components/Logo';
+// TEMP: triggering redeploy for LandingText fix
 
 function cleanSummary(text, label) {
   if (!text || typeof text !== 'string') return text;

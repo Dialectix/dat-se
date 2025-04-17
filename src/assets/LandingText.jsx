@@ -1,4 +1,4 @@
-export const LandingText = (props) => {
+const LandingText = (props) => {
   return (
     <div className="w-full h-full relative text-base md:text-lg text-gray-300">
       {/* Centered landing content */}
@@ -72,3 +72,5 @@ export const LandingText = (props) => {
     </div>
   );
 };
+
+export default LandingText;
