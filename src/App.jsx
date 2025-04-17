@@ -1,6 +1,6 @@
 // import LayoutWrapper from "./LayoutWrapper";
 import { useState, useEffect, useRef } from 'react';
-import LandingText from "./assets/LandingText";
+import { LandingText } from "./LandingText";
 import Logo from './components/Logo';
 
 function cleanSummary(text, label) {
@@ -147,7 +147,8 @@ function App() {
           </h1>
           <div className="bg-gray-800 border border-indigo-400 p-6 rounded-xl shadow-md text-gray-100 italic text-center">
             DAT is not fast. It is precise. It is not generative. It is analytical.
-            <br />It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
+            <br />
+            It is for anyone willing to confront contradiction — not as failure, but as the beginning of understanding.
           </div>
           <p>Dialectical Analysis Theory{TM} is not an instrument for generating answers — it is a structure for exposing them. It interrogates contradictions, not by erasing them, but renders them explicit, testable, and epistemically justified.</p>
           <p>DAT processes any question — from basic arithmetic to philosophical paradox — through four enforced stages: contradiction validation, synthesis testing, structural transformation, and theoretical resolution. At each step, DAT demands precision: ontological clarity, epistemic categorisation, and full structural containment.</p>
